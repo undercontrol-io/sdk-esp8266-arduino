@@ -9,6 +9,7 @@ const char* apiKey = "you_api_key";
 const int period = 5000;
 
 2- Uncomment the application you will use in the file UndercontrolSDK.ino. So far we have these:
+
 //#define ACTUATOR_RELAY          
 //#define SENSOR_SONAR            
 //#define SENSOR_TEMPERATURE      
