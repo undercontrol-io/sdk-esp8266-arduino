@@ -1,5 +1,5 @@
 #if defined(ACTUATOR_RELAY)
-
+#define ACTUATOR
 void setRelayHigh(){
   digitalWrite(PIN_RELAY, HIGH); 
 }

@@ -34,5 +34,8 @@ void sendDataToUndercontrol(float data)
   }
 }
 
+void readActionFromUndercontrol(){
+  //TODO
+end
 #endif
 

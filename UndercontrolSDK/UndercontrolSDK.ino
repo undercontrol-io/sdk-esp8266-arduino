@@ -29,15 +29,17 @@
 // Application
 /*************************************************************************************************************************/
 //***Set your API Key and time between each time data is sended to Undercontrol
-const char* apiKey = "you_api_key";
-const int period = 5000;
+const char* apiKey = "crbGyesxwvHcl4gIGX8io011mik";
+const int period = 500;
 //***Turn off for disabling Serial messages
 #define DEBUG true                //Flag to turn on/off debugging
 /*************************************************************************************************************************/
 //***Uncomment the application you are using
-//#define ACTUATOR_RELAY          
+//#define ACTUATOR_RELAY    
+#define ACTUATOR_RGB_LED      
+
 //#define SENSOR_SONAR            
-#define SENSOR_TEMPERATURE      
+//#define SENSOR_TEMPERATURE      
 //#define SENSOR_CLAP             
 /*************************************************************************************************************************/
 //***Uncomment the protocol you want to use
@@ -72,6 +74,13 @@ char mqttTopicSuscribe[40];
 #if defined(ACTUATOR_RELAY)
   #define PIN_RELAY               2
 #endif
+
+#if defined(ACTUATOR_RGB_LED)
+  #define PIN_RED                 12
+  #define PIN_GREEN               13
+  #define PIN_BLUE                14
+#endif
+
 
 #if defined(SENSOR_SONAR)
   #define PIN_SONAR_TRIGGER       2
@@ -136,4 +145,3 @@ String getAPIKey()
 {
   return apiKey;
 }
-

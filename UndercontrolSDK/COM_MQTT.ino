@@ -4,25 +4,25 @@ WiFiClient wifiClient;
 PubSubClient MQQTclient(wifiClient);
 char message_buff[100];
 
-
-void callback(char* topic, byte* payload, unsigned int length) {
-  int i = 0;
-  char message[length];
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] (lenght: ");
-  Serial.print(length);
-  Serial.print("): ");
-  // create character buffer with ending null terminator (string)
-  for(i=0; i<length; i++) {
-    message_buff[i] = payload[i];
-  } 
-  message_buff[i] = '\0';
-  Serial.println(message_buff);
-  String msgString = String(message_buff); 
-  condition(msgString);
-}
-
+#if defined(ACTUATOR)
+  void callback(char* topic, byte* payload, unsigned int length) {
+    int i = 0;
+    char message[length];
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] (lenght: ");
+    Serial.print(length);
+    Serial.print("): ");
+    // create character buffer with ending null terminator (string)
+    for(i=0; i<length; i++) {
+      message_buff[i] = payload[i];
+    } 
+    message_buff[i] = '\0';
+    Serial.println(message_buff);
+    String msgString = String(message_buff); 
+    condition(msgString);
+  }
+#endif
 
 void reconnectMQTT() {
   // Loop until we're reconnected
@@ -71,7 +71,15 @@ void readMQTTTopic(){
 
 void startMQTTClient(){
   MQQTclient.setServer(MQTT_SERVER, 1883);
-  MQQTclient.setCallback(callback);
+  #if defined(ACTUATOR)
+    MQQTclient.setCallback(callback);
+  #endif
 }
+
+#if defined(ACTUATOR)
+void readActionFromUndercontrol(){
+    readMQTTTopic();
+}
+#endif
 
 #endif
